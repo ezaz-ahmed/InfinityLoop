@@ -8,14 +8,13 @@ export class PostsService {
   constructor(private readonly usersService: UsersService) {}
 
   create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+    return {
+      createPostDto,
+      message: 'This action adds a new post',
+    };
   }
 
   findAll(userId: number) {
-    const user = this.usersService.findOneById(userId);
-
-    console.log(`🚀 ~ PostsService ~ findAll ~ user:`, user);
-
     return [];
   }
 
