@@ -7,7 +7,6 @@ import {
   IsNotEmpty,
   IsDate,
   IsUrl,
-  ValidateNested,
   ArrayMinSize,
   ArrayMaxSize,
   MinLength,
@@ -16,7 +15,7 @@ import {
   IsJSON,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreatePostMetaOptions } from './create-post-meta-options';
+import { CreateMetaOptionDto } from 'src/meta-options/dto/create-meta-option.dto';
 
 export enum PostType {
   POST = 'post',
@@ -37,7 +36,7 @@ export class CreatePostDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(5, { message: 'Title must be at least 5 characters long.' })
-  @MaxLength(100, { message: 'Title can be at most 100 characters long.' })
+  @MaxLength(512, { message: 'Title can be at most 512 characters long.' })
   title: string;
 
   @ApiProperty({
@@ -50,7 +49,7 @@ export class CreatePostDto {
     message: 'Slug can only contain lowercase letters, numbers, and hyphens.',
   })
   @MinLength(3, { message: 'Slug must be at least 3 characters long.' })
-  @MaxLength(100, { message: 'Slug can be at most 100 characters long.' })
+  @MaxLength(512, { message: 'Slug can be at most 512 characters long.' })
   slug: string;
 
   @ApiProperty({
@@ -125,11 +124,9 @@ export class CreatePostDto {
 
   @ApiPropertyOptional({
     description: 'Meta options for SEO or other purposes',
-    type: [CreatePostMetaOptions],
+    type: CreateMetaOptionDto,
   })
   @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreatePostMetaOptions)
-  metaOptions?: CreatePostMetaOptions[];
+  @Type(() => CreateMetaOptionDto)
+  metaOptions?: CreateMetaOptionDto | null;
 }

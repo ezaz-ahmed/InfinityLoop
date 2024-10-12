@@ -76,8 +76,7 @@ export class UsersController {
     description: 'Internal server error',
   })
   public createUser(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    return 'You sent a post request to the user endpoint';
+    return this.usersService.createUser(createUserDto);
   }
 
   @Patch()
