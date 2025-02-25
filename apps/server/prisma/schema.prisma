@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ReactionType {
+  FUNNY
+  SAD
+  ANGRY
+  LOVE
+  LINK
+}
+
+model User {
+  id               Int               @id @default(autoincrement())
+  name             String
+  email            String            @unique
+  bio              String?
+  avatar           String?
+  password         String
+  role             Role              @default(USER)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  posts            Post[]
+  comments         Comment[]
+  postReactions    PostReaction[]
+  commentReactions CommentReaction[]
+}
+
+model Post {
+  id         Int            @id @default(autoincrement())
+  slug       String?        @unique
+  title      String
+  content    String
+  thumbnail  String?
+  published  Boolean        @default(false)
+  authorId   Int
+  categoryId Int
+  author     User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  category   Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  comments   Comment[]
+  tags       PostTag[]
+  reactions  PostReaction[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+model Tag {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  posts     PostTag[]
+}
+
+model PostTag {
+  postId Int
+  tagId  Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+}
+
+model Comment {
+  id        Int               @id @default(autoincrement())
+  content   String
+  authorId  Int
+  postId    Int
+  author    User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post      Post              @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  reactions CommentReaction[]
+}
+
+model PostReaction {
+  id        Int          @id @default(autoincrement())
+  type      ReactionType
+  userId    Int
+  postId    Int
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime     @default(now())
+
+  @@unique([userId, postId])
+}
+
+model CommentReaction {
+  id        Int          @id @default(autoincrement())
+  type      ReactionType
+  userId    Int
+  commentId Int
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment      @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  createdAt DateTime     @default(now())
+
+  @@unique([userId, commentId])
+}
