@@ -26,7 +26,11 @@ if (env.APP_ENV === "development") {
 
 // CORS configuration based on environment
 const allowedOrigins: Record<string, string[]> = {
-  development: [env.FRONTEND_URL, "http://localhost:5173"],
+  development: [
+    env.FRONTEND_URL,
+    "http://localhost:5173",
+    "http://localhost:5174",
+  ],
   staging: [env.FRONTEND_URL],
   production: [env.FRONTEND_URL],
 };

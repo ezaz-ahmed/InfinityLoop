@@ -2,14 +2,19 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import { logoutRoute, meRoute } from "./auth.openapi";
 import { AuthService } from "../../services/auth.service";
 import { logger } from "../../utils/logger";
+import { authMiddleware } from "../../middleware/auth";
 import type { Env } from "../../types";
 
 const app = new OpenAPIHono<Env>();
 
+// Apply auth middleware to all profile routes
+app.use("*", authMiddleware);
+
 // Logout
 app.openapi(logoutRoute, async (c) => {
   const requestId = c.get("requestId");
-  const sessionId = c.req.header("Authorization")?.replace("Bearer ", "");
+  const session = c.get("session");
+  const sessionId = session?.id;
 
   logger.info("Logout attempt", requestId);
 

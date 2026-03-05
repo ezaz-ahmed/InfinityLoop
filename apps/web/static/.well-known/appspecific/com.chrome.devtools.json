@@ -1,0 +1,7 @@
+{
+	"type": "svelte",
+	"project": {
+		"name": "InfinityLoop Web",
+		"framework": "SvelteKit"
+	}
+}

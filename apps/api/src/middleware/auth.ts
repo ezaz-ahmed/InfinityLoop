@@ -1,9 +1,16 @@
 import type { Context, Next } from "hono";
 import { lucia } from "../lib/auth";
+import { getCookie } from "hono/cookie";
 
 export async function authMiddleware(c: Context, next: Next) {
+  // Try to get session from Authorization header first
   const authHeader = c.req.header("Authorization");
-  const sessionId = lucia.readBearerToken(authHeader ?? "");
+  let sessionId = lucia.readBearerToken(authHeader ?? "");
+
+  // If no Authorization header, try to get session from cookie
+  if (!sessionId) {
+    sessionId = getCookie(c, lucia.sessionCookieName) ?? null;
+  }
 
   if (!sessionId) {
     c.set("user", null);
