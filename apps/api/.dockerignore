@@ -1,0 +1,15 @@
+# Bun
+node_modules/
+dist/
+drizzle/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

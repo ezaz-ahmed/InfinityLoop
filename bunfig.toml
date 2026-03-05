@@ -1,0 +1,6 @@
+[install]
+# Use exact versions for reproducible builds
+exact = true
+
+[install.scopes]
+# Scoped registry configuration (if needed)
