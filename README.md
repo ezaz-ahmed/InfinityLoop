@@ -74,7 +74,6 @@ The API documentation (Swagger UI) will be available at http://localhost:3000/ap
 - Svelte
 - Skeleton UI
 - Tailwind CSS
-- TanStack Query
 
 ### API
 

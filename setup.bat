@@ -15,6 +15,13 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+:: Check if docker is running
+docker info >nul 2>nul
+if %errorlevel% neq 0 (
+    echo ❌ Docker is not running. Please start Docker Desktop and try again.
+    exit /b 1
+)
+
 echo ✅ Prerequisites check passed
 
 :: Install dependencies

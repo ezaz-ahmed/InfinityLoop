@@ -14,6 +14,12 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
+# Check if docker is running
+if ! docker info &> /dev/null; then
+    echo "❌ Docker is not running. Please start Docker and try again."
+    exit 1
+fi
+
 echo "✅ Prerequisites check passed"
 
 # Install dependencies

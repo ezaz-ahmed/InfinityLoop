@@ -12,7 +12,7 @@ Thank you for your interest in contributing to InfinityLoop! This document provi
 2. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/ezaz-ahmed/InfinityLoop
    cd InfinityLoop
    ```
 
