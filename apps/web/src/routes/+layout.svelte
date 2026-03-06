@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { Avatar } from '@skeletonlabs/skeleton-svelte';
 
 	let { children, data } = $props();
 	const user = $derived(data.user);
@@ -18,7 +19,10 @@
 				</div>
 				<div class="flex items-center space-x-4">
 					{#if user}
-						<span class="text-gray-700">Hello, {user.name}</span>
+						<Avatar>
+	<Avatar.Image src="https://i.pravatar.cc/150?img=48" />
+	<Avatar.Fallback>SK</Avatar.Fallback>
+</Avatar>
 						<form method="POST" action="/logout">
 							<button
 								type="submit"
