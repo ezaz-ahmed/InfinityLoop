@@ -48,8 +48,8 @@ bun run dev
 ```
 
 The web app will be available at http://localhost:5173
-The API will be available at http://localhost:3000
-The API documentation (Swagger UI) will be available at http://localhost:3000/api/swagger
+The API will be available at http://localhost:8080
+The API documentation (Swagger UI) will be available at http://localhost:8080/api/swagger
 
 ## Available Scripts
 
@@ -62,7 +62,7 @@ The API documentation (Swagger UI) will be available at http://localhost:3000/ap
 
 ## Documentation
 
-- **API Documentation**: Interactive Swagger UI available at http://localhost:3000/api/swagger (when running)
+- **API Documentation**: Interactive Swagger UI available at http://localhost:8080/api/swagger (when running)
 - [Architecture Overview](./ARCHITECTURE.md) - System architecture and design decisions
 - [Quick Start Guide](./QUICKSTART.md) - Fast setup instructions
 - [Contributing Guidelines](./CONTRIBUTING.md) - How to contribute to the project

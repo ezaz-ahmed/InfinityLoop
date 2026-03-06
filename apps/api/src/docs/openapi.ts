@@ -1,7 +1,7 @@
 import { env } from "../utils/env";
 
 const serverUrls: Record<string, string> = {
-  development: "http://localhost:3000",
+  development: "http://localhost:8080",
   staging: "https://staging-api.myapp.com",
   production: "https://api.myapp.com",
 };

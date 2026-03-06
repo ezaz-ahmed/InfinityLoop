@@ -21,7 +21,7 @@ COPY --from=build /app/dist dist
 COPY --from=build /app/package.json .
 
 # Expose port
-EXPOSE 3000
+EXPOSE 8080
 
 # Run the app
 CMD ["bun", "run", "start"]

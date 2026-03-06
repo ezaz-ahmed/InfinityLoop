@@ -23,8 +23,8 @@ bun run dev
 
 ### Apps
 
-- **Web**: Svelte + Skeleton UI + Tailwind CSS + TanStack Query (http://localhost:5173)
-- **API**: Hono + Drizzle ORM + Lucia Auth + Redis (http://localhost:3000)
+- **Web**: Svelte + Skeleton UI + Tailwind CSS (http://localhost:5173)
+- **API**: Hono + Drizzle ORM + Lucia Auth + Redis (http://localhost:8080)
 
 ### Infrastructure
 
